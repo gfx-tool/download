@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GFX TOOL - App Download</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://play-lh.googleusercontent.com/lkdCByOQxG8NJfZGh370JMXhEyn0Z9ytlOmquLK1CvJBWo3RqfbEcV00RlDZVjdD9ogHOwnQyi0GdN9V3IU9h0w=w240-h480-rw"
+    />
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Иконки FontAwesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Шрифты Google Fonts: Outfit и Plus Jakarta Sans -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Конфигурация темы Tailwind
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                light: '#eb5266',
+                DEFAULT: '#d83556',
+                dark: '#bd2443',
+              },
+            },
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+              display: ['Outfit', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background-color: #fdfdfd;
+        position: relative;
+        z-index: 0;
+        overflow-x: hidden;
+        top: 0 !important;
+      }
+
+      /* Скрытие движка Google Translate за пределами экрана для мгновенного перевода */
+      #google_translate_element {
+        position: fixed !important;
+        top: -9999px !important;
+        left: -9999px !important;
+        width: 1px !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      /* Полное удаление баннеров, спиннеров и всплывающих окон Google Translate */
+      .goog-te-banner-frame,
+      iframe.goog-te-banner-frame,
+      .VIpgJd-ZVi9od-ORHb-OEVmcd,
+      .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+      .VIpgJd-ZVi9od-aZ2wEe-OiiCO,
+      .VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
+      .goog-te-spinner-pos,
+      .goog-te-spinner-animation,
+      .goog-te-spinner,
+      #goog-gt-tt,
+      .goog-te-balloon-frame,
+      .goog-tooltip,
+      .goog-tooltip:hover,
+      body > .skiptranslate {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        pointer-events: none !important;
+      }
+      .goog-text-highlight {
+        background-color: transparent !important;
+        box-shadow: none !important;
+      }
+
+      /* Фоновый узор из точек */
+      .bg-pattern {
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(#fca5a5 1px, transparent 1px);
+        background-size: 46px 46px;
+        opacity: 0.35;
+        z-index: -2;
+        pointer-events: none;
+      }
+
+      /* Плавающие световые сферы на фоне */
+      .ambient-orb {
+        position: fixed;
+        border-radius: 9999px;
+        filter: blur(75px);
+        opacity: 0.22;
+        z-index: -1;
+        pointer-events: none;
+        will-change: transform;
+      }
+
+      .orb-1 {
+        width: 260px;
+        height: 260px;
+        background: #eb5266;
+        top: -60px;
+        left: -80px;
+        animation: floatOrb1 11s ease-in-out infinite alternate;
+      }
+
+      .orb-2 {
+        width: 280px;
+        height: 280px;
+        background: #f43f5e;
+        bottom: 5%;
+        right: -90px;
+        animation: floatOrb2 13s ease-in-out infinite alternate;
+      }
+
+      @keyframes floatOrb1 {
+        0% { transform: translate3d(0, 0, 0) scale(1); }
+        100% { transform: translate3d(45px, 60px, 0) scale(1.12); }
+      }
+
+      @keyframes floatOrb2 {
+        0% { transform: translate3d(0, 0, 0) scale(1); }
+        100% { transform: translate3d(-45px, -55px, 0) scale(1.15); }
+      }
+
+      .bg-gradient-btn {
+        background: linear-gradient(90deg, #d83556, #eb5266);
+      }
+
+      .btn-shadow {
+        box-shadow: 0 12px 24px -6px rgba(216, 53, 86, 0.45);
+      }
+
+      /* Эффект блика на главной кнопке */
+      .btn-shimmer {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-shimmer::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -120%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          110deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.35) 50%,
+          transparent 100%
+        );
+        transform: skewX(-20deg);
+        animation: shimmerSweep 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      @keyframes shimmerSweep {
+        0% { left: -120%; }
+        35%, 100% { left: 160%; }
+      }
+
+      /* Анимация пульсации сердца */
+      @keyframes heartPop {
+        0% { transform: scale(1); }
+        30% { transform: scale(1.45); }
+        60% { transform: scale(0.9); }
+        100% { transform: scale(1); }
+      }
+
+      .animate-heart-pop {
+        animation: heartPop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* Анимация появления первого экрана */
+      @keyframes springUp {
+        0% {
+          opacity: 0;
+          transform: translate3d(0, 28px, 0) scale(0.97);
+        }
+        100% {
+          opacity: 1;
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+      }
+
+      .animate-hero {
+        opacity: 0;
+        animation: springUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        will-change: transform, opacity;
+      }
+
+      .delay-100 { animation-delay: 80ms; }
+      .delay-200 { animation-delay: 180ms; }
+      .delay-300 { animation-delay: 280ms; }
+
+      /* Анимация появления блоков при прокрутке */
+      .reveal {
+        opacity: 0;
+        transform: translate3d(0, 32px, 0) scale(0.96);
+        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform, opacity;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      .stagger-1 { transition-delay: 60ms; }
+      .stagger-2 { transition-delay: 130ms; }
+      .stagger-3 { transition-delay: 200ms; }
+      .stagger-4 { transition-delay: 270ms; }
+
+      /* Плавное покачивание иконок игр */
+      @keyframes gentleFloat {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-4px); }
+      }
+
+      .float-icon {
+        animation: gentleFloat 3.6s ease-in-out infinite;
+      }
+      .float-delay-1 { animation-delay: 0s; }
+      .float-delay-2 { animation-delay: 0.45s; }
+      .float-delay-3 { animation-delay: 0.9s; }
+      .float-delay-4 { animation-delay: 1.35s; }
+
+      /* Тактильный отклик карточек и кнопок */
+      .tap-card {
+        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                    box-shadow 0.25s ease,
+                    border-color 0.25s ease;
+      }
+
+      .tap-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -10px rgba(216, 53, 86, 0.18);
+        border-color: rgba(216, 53, 86, 0.25);
+      }
+
+      .tap-card:active {
+        transform: scale(0.96);
+      }
+
+      .tap-btn {
+        transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                    box-shadow 0.2s ease,
+                    opacity 0.2s ease;
+      }
+
+      .tap-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* Тень шапки при прокрутке */
+      header {
+        transition: box-shadow 0.3s ease, background-color 0.3s ease;
+      }
+
+      header.scrolled {
+        background-color: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 8px 25px -12px rgba(15, 23, 42, 0.12);
+      }
+
+      /* Анимация выпадающего меню языков */
+      #langDropdown {
+        transform-origin: top right;
+        transition: opacity 0.22s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.22s ease;
+      }
+      #langDropdown.dropdown-open {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1) translateY(0);
+        pointer-events: auto;
+      }
+
+      /* Анимация модального окна видео */
+      #videoModal {
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+      }
+
+      #videoModal .modal-content {
+        transform: translateY(28px) scale(0.92);
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      #videoModal.modal-active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+      }
+
+      #videoModal.modal-active .modal-content {
+        transform: translateY(0) scale(1);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased text-slate-800 flex flex-col min-h-screen font-sans">
+    <!-- Скрытый контейнер Google Translate -->
+    <div id="google_translate_element"></div>
+
+    <!-- Фоновые элементы -->
+    <div class="bg-pattern"></div>
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+
+    <!-- Шапка сайта -->
+    <header id="mainHeader" class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 animate-hero">
+      <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center gap-2">
+        <!-- Логотип и название приложения -->
+        <div class="flex items-center gap-2.5 sm:gap-3 relative z-10 notranslate" translate="no">
+          <div class="w-10 h-10 bg-white rounded-[14px] flex items-center justify-center shadow-[0_4px_10px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden tap-btn flex-shrink-0">
+            <img
+              src="https://play-lh.googleusercontent.com/lkdCByOQxG8NJfZGh370JMXhEyn0Z9ytlOmquLK1CvJBWo3RqfbEcV00RlDZVjdD9ogHOwnQyi0GdN9V3IU9h0w=w240-h480-rw"
+              alt="GFX TOOL Logo"
+              class="w-full h-full object-cover rounded-[14px]"
+            />
+          </div>
+          <h1 class="text-lg sm:text-xl font-display font-extrabold tracking-wide text-brand notranslate">
+            GFX TOOL
+          </h1>
+        </div>
+
+        <!-- Правая часть: переключатель языков -->
+        <div class="flex items-center">
+          <div class="relative notranslate" translate="no" id="langSwitcherWrapper">
+            <button
+              id="langToggleBtn"
+              onclick="toggleLangDropdown()"
+              class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-gray-200/90 shadow-sm hover:border-brand/40 text-slate-700 text-xs font-display font-semibold tap-btn"
+              aria-label="Change Language"
+            >
+              <i class="fas fa-globe text-brand text-xs"></i>
+              <span id="currentLangLabel" class="notranslate">English</span>
+              <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200" id="langChevron"></i>
+            </button>
+
+            <!-- Выпадающий список языков -->
+            <div
+              id="langDropdown"
+              class="opacity-0 invisible pointer-events-none scale-95 -translate-y-2 absolute right-0 mt-2 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-100 p-2.5 z-50 notranslate"
+              translate="no"
+            >
+              <div class="px-2 py-1.5 border-b border-gray-100 mb-2 flex items-center justify-between">
+                <span class="text-[11px] font-display font-bold uppercase tracking-wider text-slate-400">
+                  Select Language
+                </span>
+                <span id="countryBadge" class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                  Detecting...
+                </span>
+              </div>
+
+              <!-- Поиск языка -->
+              <div class="relative mb-2">
+                <i class="fas fa-search absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[11px]"></i>
+                <input
+                  type="text"
+                  id="langSearchInput"
+                  oninput="renderLanguageMenu(this.value)"
+                  placeholder="Search language..."
+                  class="w-full pl-7 pr-2.5 py-1.5 text-xs bg-slate-50 border border-gray-200 rounded-xl focus:outline-none focus:border-brand/50 text-slate-700"
+                />
+              </div>
+
+              <!-- Динамический список языков -->
+              <div id="langOptionsList" class="max-h-64 overflow-y-auto space-y-1 pr-0.5"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="flex-grow flex flex-col items-center justify-center px-4 py-10 md:py-20 text-center" id="download">
+      <!-- Бейдж -->
+      <div class="animate-hero delay-100 inline-flex items-center gap-2 px-5 py-1.5 rounded-full border-2 border-brand/20 bg-white/80 backdrop-blur-sm shadow-sm mb-7">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand"></span>
+        </span>
+        <span class="text-brand font-display font-bold text-xs md:text-sm tracking-widest uppercase notranslate">
+          GFX TOOL Pro
+        </span>
+      </div>
+
+      <!-- Описание -->
+      <p class="animate-hero delay-200 text-slate-700 max-w-2xl mx-auto text-lg md:text-2xl mb-9 leading-relaxed font-display font-semibold">
+        Unlock All Exclusive &amp; Premium Skins in PUBG Mobile – All Versions. Get Unlimited UC, Diamonds, Rare Outfits &amp; Exclusive Rewards. Access Unlimited Robux, Premium Items &amp; Exclusive Roblox Collections!
+      </p>
+
+      <!-- Кнопки действий и блок лайков -->
+      <div class="animate-hero delay-300 w-full max-w-xs mx-auto flex flex-col gap-3.5">
+        <!-- Кнопка скачивания APK -->
+        <a
+          class="w-full bg-gradient-btn text-white py-3.5 rounded-2xl font-display font-bold text-lg flex items-center justify-center gap-3 btn-shadow btn-shimmer tap-btn hover:-translate-y-0.5"
+          href="YOUR_APK_DOWNLOAD_LINK"
+        >
+          <img
+            src="https://play-lh.googleusercontent.com/lkdCByOQxG8NJfZGh370JMXhEyn0Z9ytlOmquLK1CvJBWo3RqfbEcV00RlDZVjdD9ogHOwnQyi0GdN9V3IU9h0w=w240-h480-rw"
+            alt="GFX TOOL"
+            class="w-7 h-7 rounded-lg object-cover shadow-sm ring-2 ring-white/40 bg-white flex-shrink-0"
+          />
+          <span>Download APK</span>
+        </a>
+
+        <!-- Кнопка видеоинструкции -->
+        <div class="flex flex-col items-center gap-2">
+          <button
+            onclick="openVideoModal()"
+            class="w-full bg-white/95 backdrop-blur-sm text-slate-700 py-3.5 rounded-2xl font-display font-bold text-lg flex items-center justify-center gap-3 shadow-md border border-gray-100 hover:bg-gray-50 tap-btn"
+          >
+            <i class="fas fa-play-circle text-brand text-xl"></i>
+            How to Use?
+          </button>
+          <p class="text-[11px] font-medium text-slate-400 flex items-center justify-center gap-1.5 tracking-wide">
+            <i class="fas fa-sparkles text-brand text-[10px]"></i>
+            <span>Must watch <span class="text-brand font-semibold">'How to Use'</span> video</span>
+          </p>
+        </div>
+
+        <!-- Интерактивный блок 29k+ лайков -->
+        <div
+          id="loveCard"
+          onclick="toggleLove()"
+          role="button"
+          tabindex="0"
+          class="mt-1 w-full bg-white/95 backdrop-blur-sm px-4 py-3 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between gap-3 cursor-pointer tap-btn transition-all duration-300 hover:border-brand/30"
+        >
+          <div class="flex items-center gap-2.5 text-left">
+            <div
+              id="loveIconBox"
+              class="w-9 h-9 rounded-xl bg-rose-50 flex items-center justify-center text-brand text-base flex-shrink-0 transition-all duration-300"
+            >
+              <i id="loveCardIcon" class="far fa-heart"></i>
+            </div>
+            <div>
+              <p class="text-xs font-display font-bold text-slate-800 leading-tight">
+                29k+ people loved this app
+              </p>
+              <p id="loveSubText" class="text-[10px] font-medium text-slate-400 mt-0.5">
+                Tap to give love
+              </p>
+            </div>
+          </div>
+
+          <span
+            id="loveBadge"
+            class="px-3 py-1 rounded-full text-[11px] font-display font-bold bg-brand/10 text-brand transition-all duration-300 flex-shrink-0"
+          >
+            Love
+          </span>
+        </div>
+      </div>
+
+      <!-- Секция поддерживаемых игр -->
+      <div class="mt-[18px] w-full max-w-3xl">
+        <div class="reveal flex items-center justify-center gap-2 mb-5">
+          <i class="fas fa-gamepad text-brand text-lg"></i>
+          <h3 class="text-sm font-display font-extrabold text-slate-500 uppercase tracking-widest">
+            Supported Games
+          </h3>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4">
+          <!-- Free Fire -->
+          <div class="reveal stagger-1 tap-card bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
+            <img
+              src="https://ygo-assets-entities-emea.yougov.net/5ab44d68-bd93-11eb-bd1f-6562372fd995.jpg?ph=264"
+              alt="Free Fire Logo"
+              class="float-icon float-delay-1 w-16 h-16 rounded-2xl object-cover shadow-md mb-3 border border-gray-100"
+            />
+            <h4 class="text-sm font-display font-bold text-slate-800 notranslate">Free Fire</h4>
+          </div>
+
+          <!-- BGMI -->
+          <div class="reveal stagger-2 tap-card bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
+            <img
+              src="https://play-lh.googleusercontent.com/Yn_MSg1BJIQrTJI_nIxX7EaZ1ha_ICXsxw5QKBPBv96OAnwen98qu0hdEZ7zQsu-QzY7ceH0cshq-vQ8rBxSgg=w240-h480-rw"
+              alt="BGMI Logo"
+              class="float-icon float-delay-2 w-16 h-16 rounded-2xl object-cover shadow-md mb-3 border border-gray-100"
+            />
+            <h4 class="text-sm font-display font-bold text-slate-800 notranslate">BGMI</h4>
+          </div>
+
+          <!-- PUBG Mobile (Бейдж All Versions) -->
+          <div class="reveal stagger-3 tap-card relative bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
+            <span class="absolute -top-2 right-2 bg-gradient-btn text-white text-[9px] font-display font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-md ring-2 ring-white">
+              All Versions
+            </span>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/en/4/44/PlayerUnknown%27s_Battlegrounds_Mobile.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original"
+              alt="PUBG Mobile Logo"
+              class="float-icon float-delay-3 w-16 h-16 rounded-2xl object-cover shadow-md mb-3 border border-gray-100"
+            />
+            <h4 class="text-sm font-display font-bold text-slate-800 notranslate">PUBG Mobile</h4>
+          </div>
+
+          <!-- Roblox -->
+          <div class="reveal stagger-4 tap-card bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
+            <img
+              src="https://m.media-amazon.com/images/I/21aoUPG3svL.png"
+              alt="Roblox Logo"
+              class="float-icon float-delay-4 w-16 h-16 rounded-2xl object-cover shadow-md mb-3 border border-gray-100"
+            />
+            <h4 class="text-sm font-display font-bold text-slate-800 notranslate">Roblox</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Карточки характеристик приложения -->
+      <div class="mt-10 w-full max-w-3xl grid grid-cols-3 gap-3 sm:gap-4 text-center">
+        <div class="reveal stagger-1 tap-card bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-100">
+          <i class="fas fa-code-branch text-brand mb-2 text-xl"></i>
+          <h4 class="text-sm font-display font-bold text-slate-700">Version</h4>
+          <p class="text-xs text-gray-500">v3.2.0 (Latest)</p>
+        </div>
+        <div class="reveal stagger-2 tap-card bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-100">
+          <i class="fas fa-weight-hanging text-brand mb-2 text-xl"></i>
+          <h4 class="text-sm font-display font-bold text-slate-700">Size</h4>
+          <p class="text-xs text-gray-500">18.5 MB</p>
+        </div>
+        <div class="reveal stagger-3 tap-card bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-100">
+          <i class="fab fa-android text-brand mb-2 text-xl"></i>
+          <h4 class="text-sm font-display font-bold text-slate-700">Android</h4>
+          <p class="text-xs text-gray-500">8.0 &amp; Up</p>
+        </div>
+      </div>
+
+      <!-- Статистика загрузок и безопасность -->
+      <div class="mt-5 w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Счетчик загрузок -->
+        <div class="reveal stagger-1 tap-card bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4 text-left">
+          <div class="w-12 h-12 rounded-xl bg-brand/10 flex items-center justify-center text-brand text-2xl flex-shrink-0">
+            <i class="fas fa-download"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-display font-bold text-slate-400 uppercase tracking-wider">
+              Total Downloads
+            </h4>
+            <p class="text-2xl font-display font-extrabold text-slate-800">
+              <span id="downloadCounter" data-target="50">0</span>K+
+              <span class="text-xs font-semibold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full inline-block align-middle ml-1">
+                Active
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Гарантия безопасности -->
+        <div class="reveal stagger-2 tap-card bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4 text-left">
+          <div class="w-12 h-12 rounded-xl bg-brand/10 flex items-center justify-center text-brand text-2xl flex-shrink-0">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-display font-bold text-slate-400 uppercase tracking-wider">
+              Quality &amp; Security
+            </h4>
+            <p class="text-sm font-display font-bold text-slate-700 mt-0.5">
+              100% Safe &amp; Anti-Ban Supported
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="reveal py-6 text-center border-t border-gray-100 bg-white/60 backdrop-blur-sm">
+      <p class="text-xs text-gray-400">
+        © 2026 <span class="notranslate">GFX TOOL</span>. All rights reserved.
+      </p>
+    </footer>
+
+    <!-- Модальное окно для видео -->
+    <div
+      id="videoModal"
+      class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center opacity-0 invisible pointer-events-none backdrop-blur-sm p-4"
+    >
+      <div class="modal-content relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
+        <!-- Кнопка закрытия -->
+        <button
+          onclick="closeVideoModal()"
+          class="absolute top-3 right-3 z-10 w-10 h-10 bg-black/60 hover:bg-brand text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-md tap-btn"
+          aria-label="Close Video"
+        >
+          <i class="fas fa-times text-xl"></i>
+        </button>
+        <!-- Контейнер 16:9 для YouTube -->
+        <div class="relative w-full pb-[56.25%]">
+          <iframe
+            id="youtubePlayer"
+            class="absolute top-0 left-0 w-full h-full"
+            src=""
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen=""
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Инициализация Google Translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            autoDisplay: false,
+          },
+          'google_translate_element'
+        );
+        setTimeout(syncAllGoogleLanguages, 500);
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+
+    <!-- Основной скрипт приложения -->
+    <script>
+      // ==========================================
+      // 1. Сохранение лайка пользователя в localStorage
+      // ==========================================
+      const LOVE_STORAGE_KEY = 'gfx_tool_app_loved_v1';
+
+      function updateLoveUI(isLoved, animate = false) {
+        const card = document.getElementById('loveCard');
+        const iconBox = document.getElementById('loveIconBox');
+        const cardIcon = document.getElementById('loveCardIcon');
+        const subText = document.getElementById('loveSubText');
+        const badge = document.getElementById('loveBadge');
+
+        if (isLoved) {
+          card.classList.add('border-brand/30', 'bg-rose-50/40');
+          iconBox.classList.remove('bg-rose-50', 'text-brand');
+          iconBox.classList.add('bg-gradient-btn', 'text-white', 'shadow-sm');
+          cardIcon.className = 'fas fa-heart';
+          subText.textContent = 'You loved this app';
+          subText.classList.remove('text-slate-400');
+          subText.classList.add('text-brand');
+
+          badge.textContent = 'Loved';
+          badge.className =
+            'px-3 py-1 rounded-full text-[11px] font-display font-bold bg-gradient-btn text-white shadow-sm transition-all duration-300 flex-shrink-0';
+        } else {
+          card.classList.remove('border-brand/30', 'bg-rose-50/40');
+          iconBox.classList.add('bg-rose-50', 'text-brand');
+          iconBox.classList.remove('bg-gradient-btn', 'text-white', 'shadow-sm');
+          cardIcon.className = 'far fa-heart';
+          subText.textContent = 'Tap to give love';
+          subText.classList.add('text-slate-400');
+          subText.classList.remove('text-brand');
+
+          badge.textContent = 'Love';
+          badge.className =
+            'px-3 py-1 rounded-full text-[11px] font-display font-bold bg-brand/10 text-brand transition-all duration-300 flex-shrink-0';
+        }
+
+        if (animate) {
+          cardIcon.classList.remove('animate-heart-pop');
+          void cardIcon.offsetWidth;
+          cardIcon.classList.add('animate-heart-pop');
+        }
+      }
+
+      function toggleLove() {
+        const current = localStorage.getItem(LOVE_STORAGE_KEY) === 'true';
+        const nextState = !current;
+        localStorage.setItem(LOVE_STORAGE_KEY, String(nextState));
+        updateLoveUI(nextState, true);
+      }
+
+      updateLoveUI(localStorage.getItem(LOVE_STORAGE_KEY) === 'true', false);
+
+      // ==========================================
+      // 2. Перевод в 1 клик + Названия строго на английском + Автоопределение страны
+      // ==========================================
+      const countryToLangCode = {
+        AD:'ca', AE:'ar', AF:'ps', AL:'sq', AM:'hy', AO:'pt', AR:'es', AT:'de', AZ:'az',
+        BA:'bs', BD:'bn', BE:'nl', BF:'fr', BG:'bg', BH:'ar', BI:'fr', BJ:'fr', BN:'ms',
+        BO:'es', BR:'pt', BT:'dz', BY:'be', CD:'fr', CF:'fr', CG:'fr', CH:'de', CI:'fr',
+        CL:'es', CM:'fr', CN:'zh-CN', CO:'es', CR:'es', CU:'es', CV:'pt', CY:'el', CZ:'cs',
+        DE:'de', DJ:'fr', DK:'da', DO:'es', DZ:'ar', EC:'es', EE:'et', EG:'ar', ER:'ti',
+        ES:'es', ET:'am', FI:'fi', FR:'fr', GA:'fr', GE:'ka', GN:'fr', GQ:'es', GR:'el',
+        GT:'es', GW:'pt', HK:'zh-TW', HN:'es', HR:'hr', HT:'ht', HU:'hu', ID:'id', IL:'iw',
+        IN:'hi', IQ:'ar', IR:'fa', IS:'is', IT:'it', JO:'ar', JP:'ja', KE:'sw', KG:'ky',
+        KH:'km', KM:'ar', KP:'ko', KR:'ko', KW:'ar', KZ:'kk', LA:'lo', LB:'ar', LI:'de',
+        LK:'si', LT:'lt', LU:'fr', LV:'lv', LY:'ar', MA:'ar', MC:'fr', MD:'ro', ME:'sr',
+        MG:'mg', MK:'mk', ML:'fr', MM:'my', MN:'mn', MO:'zh-TW', MR:'ar', MT:'mt', MV:'dv',
+        MX:'es', MY:'ms', MZ:'pt', NE:'fr', NI:'es', NL:'nl', NO:'no', NP:'ne', OM:'ar',
+        PA:'es', PE:'es', PH:'tl', PK:'ur', PL:'pl', PS:'ar', PT:'pt', PY:'es', QA:'ar',
+        RO:'ro', RS:'sr', RU:'ru', RW:'rw', SA:'ar', SD:'ar', SE:'sv', SI:'sl', SK:'sk',
+        SM:'it', SN:'fr', SO:'so', SR:'nl', ST:'pt', SV:'es', SY:'ar', TD:'fr', TG:'fr',
+        TH:'th', TJ:'tg', TL:'pt', TM:'tk', TN:'ar', TR:'tr', TW:'zh-TW', TZ:'sw', UA:'uk',
+        UY:'es', UZ:'uz', VE:'es', VN:'vi', YE:'ar'
+      };
+
+      // Резервная карта часовых поясов на случай блокировки IP-API
+      const tzToCountryFallback = {
+        'Europe/Moscow': { cc: 'RU', name: 'Russia' },
+        'Europe/Kiev': { cc: 'UA', name: 'Ukraine' },
+        'Europe/Minsk': { cc: 'BY', name: 'Belarus' },
+        'Asia/Almaty': { cc: 'KZ', name: 'Kazakhstan' },
+        'Asia/Tashkent': { cc: 'UZ', name: 'Uzbekistan' },
+        'Europe/Istanbul': { cc: 'TR', name: 'Turkey' },
+        'Europe/Berlin': { cc: 'DE', name: 'Germany' },
+        'Europe/Paris': { cc: 'FR', name: 'France' },
+        'Europe/Madrid': { cc: 'ES', name: 'Spain' },
+        'America/Sao_Paulo': { cc: 'BR', name: 'Brazil' },
+        'Asia/Tokyo': { cc: 'JP', name: 'Japan' },
+        'Asia/Seoul': { cc: 'KR', name: 'South Korea' },
+        'Asia/Jakarta': { cc: 'ID', name: 'Indonesia' },
+        'Asia/Kolkata': { cc: 'IN', name: 'India' },
+        'Asia/Dhaka': { cc: 'BD', name: 'Bangladesh' },
+        'Asia/Karachi': { cc: 'PK', name: 'Pakistan' },
+        'Asia/Riyadh': { cc: 'SA', name: 'Saudi Arabia' },
+        'Asia/Dubai': { cc: 'AE', name: 'UAE' }
+      };
+
+      // Словарь редких кодов языков (гарантия отображения строго на английском)
+      const customEnglishNames = {
+        'iw': 'Hebrew',
+        'jw': 'Javanese',
+        'tl': 'Filipino',
+        'zh-CN': 'Chinese (Simplified)',
+        'zh-TW': 'Chinese (Traditional)',
+        'mni-Mtei': 'Meiteilon (Manipuri)',
+        'ktu': 'Kituba',
+        'dov': 'Dombe',
+        'tiv': 'Tiv',
+        'nhe': 'Nahuatl (Eastern Huasteca)',
+        'ndc-ZW': 'Ndau',
+        'fon': 'Fon',
+        'ltg': 'Latgalian',
+        'btx': 'Batak Karo',
+        'bts': 'Batak Simalungun',
+        'bbc': 'Batak Toba',
+        'crh': 'Crimean Tatar',
+        'din': 'Dinka',
+        'dyu': 'Dyula',
+        'gom': 'Konkani',
+        'hrx': 'Hunsrik',
+        'jam': 'Jamaican Patois',
+        'kac': 'Jingpo',
+        'kek': 'Qeqchi',
+        'kri': 'Krio',
+        'lij': 'Ligurian',
+        'lmo': 'Lombard',
+        'lus': 'Mizo',
+        'mad': 'Madurese',
+        'mak': 'Makassar',
+        'mam': 'Mam',
+        'min': 'Minang',
+        'mwr': 'Marwadi',
+        'new': 'Nepal Bhasa',
+        'nus': 'Nuer',
+        'pag': 'Pangasinan',
+        'pam': 'Kapampangan',
+        'pap': 'Papiamento',
+        'rom': 'Romani',
+        'scn': 'Sicilian',
+        'shn': 'Shan',
+        'szl': 'Silesian',
+        'tet': 'Tetum',
+        'tpi': 'Tok Pisin',
+        'trp': 'Kokborok',
+        'tum': 'Tumbuka',
+        'tyv': 'Tuvan',
+        'udm': 'Udmurt',
+        'vec': 'Venetian',
+        'war': 'Waray',
+        'yua': 'Yucatec Maya',
+        'zap': 'Zapotec'
+      };
+
+      const enDisplayNames =
+        typeof Intl !== 'undefined' && Intl.DisplayNames
+          ? new Intl.DisplayNames(['en'], { type: 'language' })
+          : null;
+
+      // Проверка, что строка состоит только из английских (латинских) символов
+      function isStrictEnglishText(str) {
+        return /^[A-Za-z0-9\s\-\(\)\'\/,\.]+$/.test(str);
+      }
+
+      // Возвращает название языка строго на английском
+      function getEnglishLangName(code) {
+        if (code === 'en') return 'English';
+        if (customEnglishNames[code]) return customEnglishNames[code];
+
+        if (enDisplayNames) {
+          try {
+            const name = enDisplayNames.of(code);
+            if (name && name.toLowerCase() !== code.toLowerCase() && isStrictEnglishText(name)) {
+              return name.charAt(0).toUpperCase() + name.slice(1);
+            }
+          } catch (e) {}
+        }
+        return null;
+      }
+
+      let allWorldLanguages = [
+        { code: 'ru', name: 'Russian' },
+        { code: 'ar', name: 'Arabic' },
+        { code: 'bn', name: 'Bengali' },
+        { code: 'zh-CN', name: 'Chinese (Simplified)' },
+        { code: 'fr', name: 'French' },
+        { code: 'de', name: 'German' },
+        { code: 'hi', name: 'Hindi' },
+        { code: 'id', name: 'Indonesian' },
+        { code: 'ja', name: 'Japanese' },
+        { code: 'ko', name: 'Korean' },
+        { code: 'ms', name: 'Malay' },
+        { code: 'pt', name: 'Portuguese' },
+        { code: 'es', name: 'Spanish' },
+        { code: 'th', name: 'Thai' },
+        { code: 'tr', name: 'Turkish' },
+        { code: 'uk', name: 'Ukrainian' },
+        { code: 'ur', name: 'Urdu' },
+        { code: 'vi', name: 'Vietnamese' }
+      ];
+
+      let activeLang = 'en';
+      let detectedLocalLang = null;
+
+      function getOffsetMinutesForTZ(tz) {
+        try {
+          const now = new Date();
+          const tzDate = new Date(now.toLocaleString('en-US', { timeZone: tz }));
+          const utcDate = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }));
+          return Math.round((tzDate - utcDate) / 60000);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      // Загрузка всех поддерживаемых языков Google Translate строго на английском
+      function syncAllGoogleLanguages() {
+        const selectEl = document.querySelector('.goog-te-combo');
+        if (!selectEl || selectEl.options.length < 5) {
+          setTimeout(syncAllGoogleLanguages, 400);
+          return;
+        }
+        const extracted = [];
+        const seen = new Set();
+
+        for (let i = 0; i < selectEl.options.length; i++) {
+          const opt = selectEl.options[i];
+          const code = opt.value;
+          if (!code || code === 'en' || seen.has(code)) continue;
+
+          // Получаем английское название (игнорируем локализованный opt.text, если он не на латинице)
+          let engName = getEnglishLangName(code);
+          if (!engName && opt.text && isStrictEnglishText(opt.text)) {
+            engName = opt.text.trim();
+          }
+
+          if (engName) {
+            seen.add(code);
+            extracted.push({ code: code, name: engName });
+          }
+        }
+
+        if (extracted.length > 0) {
+          extracted.sort((a, b) => a.name.localeCompare(b.name));
+          allWorldLanguages = extracted;
+          if (detectedLocalLang) {
+            detectedLocalLang.name = getEnglishLangName(detectedLocalLang.code) || detectedLocalLang.code.toUpperCase();
+          }
+          renderLanguageMenu(document.getElementById('langSearchInput').value);
+        }
+      }
+
+      function setCookie(name, value) {
+        document.cookie = name + '=' + value + '; path=/';
+        if (window.location.hostname) {
+          document.cookie = name + '=' + value + '; path=/; domain=' + window.location.hostname;
+        }
+      }
+
+      // Мгновенный запуск перевода по первому клику
+      function triggerGoogleTranslate(langCode, attempt = 0) {
+        const selectEl = document.querySelector('.goog-te-combo');
+
+        if (!selectEl || selectEl.options.length < 2) {
+          if (attempt < 20) {
+            setTimeout(() => triggerGoogleTranslate(langCode, attempt + 1), 150);
+          }
+          return;
+        }
+
+        if (langCode === 'en') {
+          setCookie('googtrans', '/en/en');
+
+          try {
+            const bannerIframe = document.querySelector('.goog-te-banner-frame');
+            if (bannerIframe && bannerIframe.contentDocument) {
+              const restoreBtn = bannerIframe.contentDocument.querySelector('button[id$=".restore"]');
+              if (restoreBtn) {
+                restoreBtn.click();
+                return;
+              }
+            }
+          } catch (e) {}
+
+          selectEl.value = '';
+          selectEl.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+
+          setTimeout(() => {
+            if (
+              document.documentElement.classList.contains('translated-ltr') ||
+              document.documentElement.classList.contains('translated-rtl')
+            ) {
+              selectEl.value = 'en';
+              selectEl.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+              selectEl.value = '';
+              selectEl.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+            }
+          }, 120);
+        } else {
+          setCookie('googtrans', '/en/' + langCode);
+
+          selectEl.value = langCode;
+          selectEl.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+
+          setTimeout(() => {
+            if (
+              activeLang === langCode &&
+              document.documentElement.lang !== langCode &&
+              !document.documentElement.classList.contains('translated-ltr') &&
+              !document.documentElement.classList.contains('translated-rtl')
+            ) {
+              selectEl.value = langCode;
+              selectEl.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+            }
+          }, 120);
+        }
+      }
+
+      function applyTranslation(langCode) {
+        activeLang = langCode;
+        document.getElementById('currentLangLabel').textContent =
+          getEnglishLangName(langCode) || langCode.toUpperCase();
+
+        triggerGoogleTranslate(langCode);
+
+        renderLanguageMenu(document.getElementById('langSearchInput').value);
+        closeLangDropdown();
+      }
+
+      function renderLanguageMenu(searchQuery = '') {
+        const container = document.getElementById('langOptionsList');
+        const q = searchQuery.trim().toLowerCase();
+        let html = '';
+
+        // 1. Язык по умолчанию: English
+        if (!q || 'english'.includes(q) || 'en'.includes(q) || 'default'.includes(q)) {
+          html += createLangButton('en', 'English', 'Default Language', activeLang === 'en', false);
+        }
+
+        // 2. Определенный язык страны пользователя (сразу под English)
+        if (
+          detectedLocalLang &&
+          detectedLocalLang.code !== 'en' &&
+          (!q ||
+            detectedLocalLang.name.toLowerCase().includes(q) ||
+            detectedLocalLang.label.toLowerCase().includes(q))
+        ) {
+          html += createLangButton(
+            detectedLocalLang.code,
+            detectedLocalLang.name,
+            'Detected • ' + detectedLocalLang.label,
+            activeLang === detectedLocalLang.code,
+            true
+          );
+        }
+
+        html += `<div class="my-1.5 border-t border-gray-100"></div>`;
+        html += `<p class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">All World Languages</p>`;
+
+        // 3. Все языки мира (строго на английском)
+        let count = 0;
+        allWorldLanguages.forEach((lang) => {
+          if (detectedLocalLang && lang.code === detectedLocalLang.code) return;
+          if (q && !lang.name.toLowerCase().includes(q) && !lang.code.toLowerCase().includes(q)) return;
+          html += createLangButton(lang.code, lang.name, '', activeLang === lang.code, false);
+          count++;
+        });
+
+        if (count === 0 && q) {
+          html += `<p class="text-center text-xs text-slate-400 py-3">No language found</p>`;
+        }
+
+        container.innerHTML = html;
+      }
+
+      function createLangButton(code, title, subtitle, isActive, isDetected = false) {
+        const baseStyle = isActive
+          ? 'bg-brand/10 text-brand font-bold border border-brand/20'
+          : isDetected
+          ? 'bg-rose-50/70 hover:bg-rose-50 text-slate-800 font-semibold border border-brand/15'
+          : 'hover:bg-slate-50 text-slate-700 font-medium border border-transparent';
+
+        return `
+          <button
+            onclick="applyTranslation('${code}')"
+            class="w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left transition-colors notranslate ${baseStyle}"
+            translate="no"
+          >
+            <div class="flex flex-col truncate pr-2">
+              <span class="text-xs leading-tight truncate">${title}</span>
+              ${
+                subtitle
+                  ? `<span class="text-[10px] mt-0.5 ${
+                      isDetected ? 'text-brand font-semibold' : 'text-slate-400'
+                    }">${subtitle}</span>`
+                  : ''
+              }
+            </div>
+            ${
+              isActive
+                ? '<i class="fas fa-check-circle text-brand text-xs flex-shrink-0"></i>'
+                : isDetected
+                ? '<i class="fas fa-location-dot text-brand/70 text-[11px] flex-shrink-0"></i>'
+                : ''
+            }
+          </button>
+        `;
+      }
+
+      function toggleLangDropdown() {
+        const dd = document.getElementById('langDropdown');
+        const chev = document.getElementById('langChevron');
+        if (dd.classList.contains('dropdown-open')) {
+          closeLangDropdown();
+        } else {
+          dd.classList.add('dropdown-open');
+          chev.style.transform = 'rotate(180deg)';
+        }
+      }
+
+      function closeLangDropdown() {
+        const dd = document.getElementById('langDropdown');
+        const chev = document.getElementById('langChevron');
+        dd.classList.remove('dropdown-open');
+        chev.style.transform = 'rotate(0deg)';
+      }
+
+      document.addEventListener('click', (e) => {
+        const wrapper = document.getElementById('langSwitcherWrapper');
+        if (!wrapper.contains(e.target)) {
+          closeLangDropdown();
+        }
+      });
+
+      // Определение страны и проверка наличия VPN
+      async function detectCountryAndVPN() {
+        const badge = document.getElementById('countryBadge');
+        const deviceOffsetMin = -new Date().getTimezoneOffset();
+
+        let countryCode = null;
+        let countryName = null;
+        let ipOffsetMin = null;
+
+        try {
+          const res1 = await fetch('https://get.geojs.io/v1/ip/geo.json');
+          if (res1.ok) {
+            const d1 = await res1.json();
+            if (d1 && d1.country_code) {
+              countryCode = d1.country_code;
+              countryName = d1.country || d1.country_code;
+              if (d1.timezone) ipOffsetMin = getOffsetMinutesForTZ(d1.timezone);
+            }
+          }
+        } catch (e) {}
+
+        if (!countryCode) {
+          try {
+            const res2 = await fetch('https://ipwho.is/');
+            if (res2.ok) {
+              const d2 = await res2.json();
+              if (d2 && d2.success && d2.country_code) {
+                countryCode = d2.country_code;
+                countryName = d2.country || d2.country_code;
+                if (d2.timezone && typeof d2.timezone.offset === 'number') {
+                  ipOffsetMin = Math.round(d2.timezone.offset / 60);
+                }
+              }
+            }
+          } catch (e) {}
+        }
+
+        if (!countryCode) {
+          try {
+            const res3 = await fetch('https://ipapi.co/json/');
+            if (res3.ok) {
+              const d3 = await res3.json();
+              if (d3 && d3.country_code) {
+                countryCode = d3.country_code;
+                countryName = d3.country_name || d3.country_code;
+                if (d3.timezone) ipOffsetMin = getOffsetMinutesForTZ(d3.timezone);
+              }
+            }
+          } catch (e) {}
+        }
+
+        if (!countryCode) {
+          const deviceTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          if (deviceTZ && tzToCountryFallback[deviceTZ]) {
+            countryCode = tzToCountryFallback[deviceTZ].cc;
+            countryName = tzToCountryFallback[deviceTZ].name;
+            ipOffsetMin = deviceOffsetMin;
+          }
+        }
+
+        if (!countryCode) {
+          badge.textContent = 'Default';
+          renderLanguageMenu();
+          return;
+        }
+
+        const isVPN = ipOffsetMin !== null && Math.abs(deviceOffsetMin - ipOffsetMin) > 65;
+
+        if (isVPN) {
+          badge.textContent = 'VPN • EN Default';
+          detectedLocalLang = null;
+        } else {
+          badge.textContent = countryName || countryCode;
+          const mappedCode = countryToLangCode[countryCode];
+          if (mappedCode) {
+            detectedLocalLang = {
+              code: mappedCode,
+              name: getEnglishLangName(mappedCode) || mappedCode.toUpperCase(),
+              label: countryName || countryCode,
+            };
+          }
+        }
+
+        renderLanguageMenu(document.getElementById('langSearchInput').value);
+      }
+
+      setCookie('googtrans', '/en/en');
+      renderLanguageMenu();
+      detectCountryAndVPN();
+
+      // ==========================================
+      // 3. Логика модального окна видео
+      // ==========================================
+      const modal = document.getElementById('videoModal');
+      const player = document.getElementById('youtubePlayer');
+      const videoUrl = "https://www.youtube.com/embed/9jo51nJrO0k?si=gBwQfSmB_rFgVfRe&autoplay=1";
+
+      function openVideoModal() {
+        player.src = videoUrl;
+        modal.classList.add('modal-active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeVideoModal() {
+        modal.classList.remove('modal-active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          player.src = "";
+        }, 350);
+      }
+
+      modal.addEventListener('click', function (e) {
+        if (e.target === this) {
+          closeVideoModal();
+        }
+      });
+
+      // ==========================================
+      // 4. Анимации при прокрутке и счетчик загрузок
+      // ==========================================
+      const header = document.getElementById('mainHeader');
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (window.scrollY > 12) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        },
+        { passive: true }
+      );
+
+      let counterStarted = false;
+      const counterEl = document.getElementById('downloadCounter');
+
+      function animateCounter(el, target) {
+        const duration = 1200;
+        const startTime = performance.now();
+
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target);
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            el.textContent = target;
+          }
+        }
+        requestAnimationFrame(update);
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+
+              if (!counterStarted && entry.target.contains(counterEl)) {
+                counterStarted = true;
+                const target = parseInt(counterEl.getAttribute('data-target'), 10);
+                animateCounter(counterEl, target);
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: '0px 0px -30px 0px',
+        }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
